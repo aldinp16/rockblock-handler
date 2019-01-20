@@ -1,0 +1,10 @@
+{
+  "name": "rockblock-handler",
+  "version": "1.0.0",
+  "description": "rockblock data handler",
+  "author": "aldinp16",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4"
+  }
+}
