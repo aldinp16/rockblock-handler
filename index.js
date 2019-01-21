@@ -38,14 +38,15 @@ const payloadParser = new binaryParser()
 
 app.post('/rockblock-data-handler', async (req, res) => {
 
-  if (req.get('Content-Type') !== 'application/x-www-form-urlencoded; charset=UTF-8') {
+  if (req.get('Content-Type') !== 'application/x-www-form-urlencoded; charset=UTF-8' && req.body.data === '') {
     return res.status(200).end()
   }
 
-  const data = payloadParser.parse(Buffer.from(req.body.data, 'hex'))
+  const payload = Buffer.from(req.body.data, 'hex')
+  const data = payloadParser.parse(payload)
   data.imei = req.body.imei
-  data.longitude = req.body.data.iridium_longitude
-  data.latitude = req.body.data.iridium_latitude
+  data.longitude = req.body.iridium_longitude
+  data.latitude = req.body.iridium_latitude
 
   const tags = {}
   influxSchema.tags.forEach((tag) => {
@@ -57,7 +58,7 @@ app.post('/rockblock-data-handler', async (req, res) => {
     Object.keys(influxSchema.schema[measurement]).forEach((field) => {
       fields[field] = data[field]
     })
-    return { measurement, fields, tags, timestamp: data.body.transmit_time }
+    return { measurement, fields, tags, timestamp: req.body.transmit_time }
   })
 
   try {
