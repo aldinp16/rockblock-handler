@@ -41,6 +41,6 @@ module.exports = {
   tags: [
     'imei',
     'water_relay',
-    'air_Relay'
+    'air_relay'
   ]
 }
