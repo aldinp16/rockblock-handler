@@ -57,7 +57,7 @@ app.post('/rockblock-data-handler', async (req, res) => {
     Object.keys(influxSchema.schema[measurement]).forEach((field) => {
       fields[field] = data[field]
     })
-    return { measurement, fields, tags }
+    return { measurement, fields, tags, timestamp: data.body.transmit_time }
   })
 
   try {
@@ -66,7 +66,7 @@ app.post('/rockblock-data-handler', async (req, res) => {
     return res.status(500).end()
   }
 
-  res.status(200).end()
+  return res.status(200).end()
 })
 
 app.listen(port, () => {
