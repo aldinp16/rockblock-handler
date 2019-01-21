@@ -38,7 +38,8 @@ const payloadParser = new binaryParser()
 
 app.post('/rockblock-data-handler', async (req, res) => {
 
-  if (req.get('Content-Type') !== 'application/x-www-form-urlencoded; charset=UTF-8' && req.body.data === '') {
+  // if payload is empty 200
+  if (req.body.data === '') {
     return res.status(200).end()
   }
 
@@ -47,6 +48,7 @@ app.post('/rockblock-data-handler', async (req, res) => {
   data.imei = req.body.imei
   data.longitude = req.body.iridium_longitude
   data.latitude = req.body.iridium_latitude
+  data.binary_string = req.body.data
 
   const tags = {}
   influxSchema.tags.forEach((tag) => {
@@ -55,15 +57,19 @@ app.post('/rockblock-data-handler', async (req, res) => {
 
   const iPoints = Object.keys(influxSchema.schema).map((measurement) => {
     const fields = {}
+    const timestamp = new Date('20' + req.body.transmit_time)
     Object.keys(influxSchema.schema[measurement]).forEach((field) => {
       fields[field] = data[field]
     })
-    return { measurement, fields, tags, timestamp: '20' + req.body.transmit_time }
+    return { measurement, fields, tags, timestamp }
   })
 
   try {
-    await database.writePoints(iPoints)    
+    await database.writePoints(iPoints)
+    console.log(`${new Date()} IMEI: ${data.imei}, RAW: ${data.binary_string}, 200 OK`) 
   } catch (err) {
+    console.error(`${new Date()} IMEI ${data.imei}, RAW: ${data.binary_string} 500 Internal Server Error`)
+    console.error(err)
     return res.status(500).end()
   }
 
