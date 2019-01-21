@@ -42,7 +42,7 @@ app.post('/rockblock-data-handler', async (req, res) => {
     return res.status(200).end()
   }
 
-  const data = payloadParser.parse(req.body.data)
+  const data = payloadParser.parse(Buffer.from(req.body.data, 'hex'))
   data.imei = req.body.data.imei
   data.longitude = req.body.data.iridium_longitude
   data.latitude = req.body.data.iridium_latitude
