@@ -58,7 +58,7 @@ app.post('/rockblock-data-handler', async (req, res) => {
     Object.keys(influxSchema.schema[measurement]).forEach((field) => {
       fields[field] = data[field]
     })
-    return { measurement, fields, tags, timestamp: req.body.transmit_time }
+    return { measurement, fields, tags, timestamp: '20' + req.body.transmit_time }
   })
 
   try {
