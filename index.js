@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const port = process.env.ROCKBLOCK_HANDLE_PORT
 
-const payloadParser = new Parser()
+const payloadParser = new binaryParser()
   .endianess("big")
   .int16('temperature')
   .int16("yaw_angle")
