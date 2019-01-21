@@ -14,7 +14,7 @@ const database = new influx.InfluxDB({
   host: dbHost,
   database: dbName,
   username: dbUsername,
-  dbPassword: dbPassword,
+  password: dbPassword,
   schema: Object.keys(influxSchema.schema).map((measurement) => {
     return {
       measurement,
