@@ -36,6 +36,9 @@ module.exports = {
     },
     'environment': {
       'temperature': influx.FieldType.FLOAT
+    },
+    'raw': {
+      'binary_string': influx.FieldType.STRING
     }
   },
   tags: [
