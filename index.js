@@ -35,7 +35,7 @@ app.post('/rockblock-data-handler', async (req, res) => {
 
   // combine tag key with tag value
   const tags = {}
-  for (const key in influxSchema.tags) {
+  for (const key of influxSchema.tags) {
     tags[key] = data[key]
   }
 
