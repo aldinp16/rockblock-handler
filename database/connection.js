@@ -1,24 +1,20 @@
 'use strict'
 
-const influx = require('influx')
-const influxSchema = require('./schema.js')
 require('dotenv').config()
 
-const dbHost = process.env.INFLUXDB_HOST
-const dbPort = process.env.INFLUXDB_PORT
-const dbName = process.env.INFLUXDB_NAME
-const dbUsername = process.env.INFLUXDB_USERNAME
-const dbPassword = process.env.INFLUXDB_PASSWORD
+const influx = require('influx')
+const influxSchema = require('./schema.js')
 
 const database = new influx.InfluxDB({
-  host: dbHost,
-  database: dbName,
-  username: dbUsername,
-  password: dbPassword,
+  host: process.env.INFLUXDB_HOST,
+  database: process.env.INFLUXDB_NAME,
+  port: process.env.INFLUXDB_PORT,
+  username: process.env.INFLUXDB_USERNAME,
+  password: process.env.INFLUXDB_PASSWORD,
   schema: Object.keys(influxSchema.schema).map((measurement) => {
     return {
       measurement,
-      fields:influxSchema.schema[measurement],
+      fields: influxSchema.schema[measurement],
       tags: influxSchema.tags
     }
   })

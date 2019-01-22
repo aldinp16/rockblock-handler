@@ -10,5 +10,8 @@
     "express": "^4.16.4",
     "influx": "^5.0.7",
     "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
   }
 }
