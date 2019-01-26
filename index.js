@@ -53,7 +53,7 @@ app.post('/rockblock-data-handler', async (req, res) => {
   // check if gps_satelite === 0 delete from iPoints
   for (const iPoint of iPoints) {
     if (iPoint.measurement === 'gps') {
-      if ((iPoint.fields.gps_longitude === 0) && (iPoint.field.gps_latitude === 0)) {
+      if ((iPoint.fields.gps_longitude === 0) && (iPoint.fields.gps_latitude === 0)) {
         iPoints.splice(2, 1)
       }
     }
