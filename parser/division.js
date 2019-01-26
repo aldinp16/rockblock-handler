@@ -8,5 +8,6 @@ module.exports = {
   'gps_latitude': 100,
   'gps_longitude': 100,
   'gps_speed': 100,
-  'gps_altitude': 100
+  'gps_altitude': 100,
+  'gps_altitude_high': 100
 }
