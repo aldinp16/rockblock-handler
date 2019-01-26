@@ -50,6 +50,13 @@ app.post('/rockblock-data-handler', async (req, res) => {
     iPoints.push({ measurement, fields, tags, timestamp })
   }
 
+  // check if gps_satelite === 0 delete from iPoints
+  for (const iPoint of iPoints) {
+    if ((iPoint.measurement) === 'gps' && (iPoint.fields.gps_satelite === 0)) {
+      iPoints.splice(2, 1)
+    }
+  }
+
   try {
     await database.writePoints(iPoints)
   } catch (err) {
