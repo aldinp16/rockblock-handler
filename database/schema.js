@@ -20,6 +20,7 @@ module.exports = {
       'gps_latitude': influx.FieldType.FLOAT,
       'gps_altitude': influx.FieldType.FLOAT,
       'gps_speed': influx.FieldType.FLOAT,
+      'gps_altitude_high': influx.FieldType.FLOAT,
       'gps_satelite': influx.FieldType.INTEGER
     },
     'generator': {

@@ -23,5 +23,6 @@ const payloadParser = new Parser()
   .int16('back_airspeed')
   .int16('rpm')
   .uint8('rockblock_satelite')
+  .uint32('gps_altitude_high')
 
 module.exports = payloadParser
